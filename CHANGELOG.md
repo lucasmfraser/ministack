@@ -7,6 +7,13 @@ Versioning follows [Semantic Versioning](https://semver.org/).
 
 ---
 
+## [Unreleased]
+
+### Fixed
+- **Step Functions — `ecs:runTask` / `ecs:runTask.sync` no longer drop `ContainerOverrides`** — the Pascal→camelCase conversion at the SFN→ECS hand-off only covered top-level Parameters keys, so `Overrides.ContainerOverrides` (including resolved `"Value.$"` entries) stayed PascalCase and was silently ignored: the container ran with task-definition env only while the task launched and the `.sync` state succeeded. The conversion is now recursive; nested `NetworkConfiguration` is covered by the same pass. (#886)
+
+---
+
 ## [1.3.61] — 2026-06-10
 
 ### Added
